@@ -31,25 +31,25 @@ This Angular app provides:
 
 ```
 src/
-├── app/
-│   ├── core/
-│   │   ├── environment/                 
-│   │   └── services/
-│   │       ├── collections/             
-│   │       └── tmdb/                    
-│   ├── directives/
-│   │   └── alphanumeric-validator/     
-│   ├── features/
-│   │   ├── collections/
-│   │   │   ├── add-to-collection-modal/   
-│   │   │   ├── collection-details/        
-│   │   │   ├── create-collection/          
-│   │   │   └── movies-collections/         
-│   │   ├── movie-details-modal/             
-│   │   └── search/
-│   │       └── search-page/                
-│   ├── models/                            
-│   └── shared/                            
+└───app
+    ├───core
+    │   ├───components
+    │   │   └───header
+    │   ├───environment
+    │   └───services
+    │       ├───collections
+    │       └───tmdb
+    ├───directives
+    │   └───alphanumeric-validator
+    ├───features
+    │   ├───collections
+    │   │   ├───add-to-collection-modal
+    │   │   ├───collection-details
+    │   │   ├───create-collection
+    │   │   └───movies-collections
+    │   ├───movie-details-modal
+    │   └───search
+    └───models  
 ```
 
 ---
