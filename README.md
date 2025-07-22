@@ -152,11 +152,7 @@ const routes: Routes = [
 
 ### Installation
 
-1. Navigate to the project:
-
-   ```bash
-   cd movies-app
-   ```
+1. Navigate to the project
 
 2. Install dependencies:
 
