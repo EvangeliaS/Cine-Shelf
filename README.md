@@ -8,6 +8,7 @@ A sleek and modular Angular application that lets you **search for movies**, **v
 
 * [Project Overview](#project-overview)
 * [Project Structure](#project-structure)
+* [Technologies Used](#technologies-used)
 * [Routes Configuration](#routes-configuration)
 * [Features](#features)
 * [Core Services](#core-services)
@@ -54,7 +55,7 @@ src/
 
 ---
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 - **Angular 18** — with standalone components, route-level lazy loading, and strong typing
 - **Angular Material** — UI components (e.g., paginator, modal dialogs)
