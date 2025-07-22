@@ -1,0 +1,16 @@
+<mat-toolbar color="primary" class="d-flex justify-content-between align-items-center toolbar">
+  <div class="nav-links">
+    <a mat-button routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }" class="nav-item">
+      <mat-icon>home</mat-icon>
+      <span>Home</span>
+    </a>
+    <a mat-button routerLink="/collections/create" routerLinkActive="active-link"  [routerLinkActiveOptions]="{ exact: true }" class="nav-item">
+      <mat-icon>add_circle</mat-icon>
+      <span>New Collection</span>
+    </a>
+    <a mat-button routerLink="/collections" routerLinkActive="active-link"  [routerLinkActiveOptions]="{ exact: true }" class="nav-item">
+      <mat-icon>folder</mat-icon>
+      <span>Collections</span>
+    </a>
+  </div>
+</mat-toolbar>

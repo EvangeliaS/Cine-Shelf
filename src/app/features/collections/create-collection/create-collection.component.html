@@ -1,0 +1,94 @@
+<div [ngClass]="isDialog ? 'dialog-container' : 'create-collection-page'">
+  
+  <!-- Dialog Header -->
+  <div *ngIf="isDialog" class="dialog-header">
+    <div class="header-text">
+        <div class="card-header-content">
+          <mat-icon class="header-icon">folder</mat-icon>
+          <div>
+            <mat-card-title>Collection Details</mat-card-title>
+            <mat-card-subtitle>Enter the basic information for your collection</mat-card-subtitle>
+          </div>
+        </div>
+    </div>
+    <button mat-icon-button (click)="goBack()" class="dialog-close-btn">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <!-- Page Header -->
+  <div *ngIf="!isDialog" class="page-container">
+    <div class="page-header">
+      <button mat-icon-button (click)="goBack()" class="back-btn">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <div class="header-content">
+        <h1>Create New Collection</h1>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form Content -->
+  <div [ngClass]="isDialog ? 'dialog-content' : 'page-content'">
+    <mat-card class="form-card">
+      <mat-card-header *ngIf="!isDialog">
+        <div class="card-header-content">
+          <mat-icon class="header-icon">folder</mat-icon>
+          <div>
+            <mat-card-title>Collection Details</mat-card-title>
+            <mat-card-subtitle>Enter the basic information for your collection</mat-card-subtitle>
+          </div>
+        </div>
+      </mat-card-header>
+
+      <mat-card-content>
+        <form [formGroup]="form" class="collection-form">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Collection Title</mat-label>
+            <input 
+              matInput 
+              formControlName="title" 
+              placeholder="Enter a name for your collection"
+              maxlength="100">
+            <mat-hint>Give your collection a memorable name ({{ getCharacterCount('title') }}/100)</mat-hint>
+            <mat-error *ngIf="form.get('title')?.hasError('required')">
+              Collection title is required
+            </mat-error>
+            <mat-error *ngIf="form.get('title')?.hasError('minlength')">
+              Title must be at least 2 characters long
+            </mat-error>
+            <mat-error *ngIf="form.get('title')?.hasError('maxlength')">
+              Title cannot exceed 100 characters
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Description (Optional)</mat-label>
+            <textarea 
+              matInput 
+              formControlName="description" 
+              rows="3"
+              placeholder="Describe what makes this collection special..."
+              maxlength="500">
+            </textarea>
+            <mat-hint>Help others understand what this collection is about ({{ getCharacterCount('description') }}/500)</mat-hint>
+            <mat-error *ngIf="form.get('description')?.hasError('maxlength')">
+              Description cannot exceed 500 characters
+            </mat-error>
+          </mat-form-field>
+        </form>
+      </mat-card-content>
+
+      <mat-card-actions class="card-actions">
+        <button 
+          mat-raised-button
+          (click)="createCollection()"
+          [disabled]="form.invalid || isSubmitting"
+          class="create-btn">
+          <mat-icon>{{ isSubmitting ? 'hourglass_empty' : 'add' }}</mat-icon>
+          {{ isSubmitting ? 'Creating...' : 'Create Collection' }}
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

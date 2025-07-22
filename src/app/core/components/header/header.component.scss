@@ -1,0 +1,37 @@
+ .toolbar {
+    flex-wrap: wrap;
+  }
+
+  .toolbar-title {
+    font-size: 1.25rem;
+    color: #ffffff;
+    font-weight: bold;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    color: #6e6ee6;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .nav-item:hover {
+    color: #3d3db1;
+    text-decoration: underline;
+  }
+
+  .nav-item span {
+    margin-left: 0.25rem;
+  }
+
+  .active-link {
+    color: #4848c2 !important;
+    font-weight: bold;
+  }

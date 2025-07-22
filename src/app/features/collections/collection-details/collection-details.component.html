@@ -1,0 +1,44 @@
+<div class="container py-4">
+  <h2 class="mb-4">Collection Details</h2>
+
+  <div *ngIf="notFound" class="text-danger">
+    <h4>Collection not found.</h4>
+    <p>Please check the URL or return to the collections page.</p>
+  </div>
+
+  <ng-container *ngIf="collection && !notFound">
+    <h4>{{ collection.title }}</h4>
+    <p>{{ collection.description || 'No description provided.' }}</p>
+
+    <div *ngIf="collection.movies.length === 0" class="text-muted">
+      No movies in this collection yet.
+    </div>
+
+    <div class="row g-4 mb-5" *ngIf="collection.movies.length > 0">
+      <div class="col-6 col-md-4 col-lg-3 col-xl-2" *ngFor="let movie of collection.movies">
+        <mat-card class="h-100 movie-card shadow-sm position-relative">
+            <mat-card-content class="p-2">
+                <strong class="lh-base">{{ movie.title }}</strong>
+                <button
+                mat-icon-button
+                class="position-absolute top-0 end-0 mb-2"
+                color="warn"
+                aria-label="Remove from collection"
+                matTooltip="Remove from collection"
+                matTooltipPosition="above"
+                (click)="removeMovie(movie.id, $event)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </mat-card-content>
+            <img
+                mat-card-image
+                [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path"
+                [alt]="movie.title"
+                class="img-fluid"
+                style="height: 300px; object-fit: cover;"
+                (click)="openMovieDetails(movie.id)"/>
+        </mat-card>
+      </div>
+    </div>
+  </ng-container>
+</div>

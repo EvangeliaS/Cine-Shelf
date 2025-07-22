@@ -1,0 +1,84 @@
+<div class="route-popup-overlay" (click)="onOverlayClick($event)">
+  <div class="route-popup-container" (click)="$event.stopPropagation()">
+
+    <button mat-icon-button (click)="close()" class="close-btn">
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <div *ngIf="isLoading" class="center-content">
+      <mat-spinner diameter="50"></mat-spinner>
+      <p>Loading movie details...</p>
+    </div>
+
+    <div *ngIf="error && !isLoading" class="center-content">
+      <mat-icon color="warn">error</mat-icon>
+      <p>{{ error }}</p>
+    </div>
+
+    <div *ngIf="movie && !isLoading" class="movie-content">
+      <div class="content-layout">
+        <div class="poster-section">
+          <img [src]="getImageUrl(movie.poster_path)" [alt]="movie.title" class="poster">
+        </div>
+
+        <div class="info-section">
+          <h2>{{ movie.title }}</h2>
+
+          <div class="meta-row">
+            <div class="rating">
+              <mat-icon>star</mat-icon>
+              <strong>{{ movie.vote_average | number: '1.1-1' }}</strong>/10
+              <span>({{ movie.vote_count }} votes)</span>
+            </div>
+            <span class="release-date">{{ movie.release_date | date: 'dd/MM/yyyy' }}</span>
+          </div>
+
+          <div class="section">
+            <h5>Overview</h5>
+            <p>{{ movie.overview || 'No overview available.' }}</p>
+          </div>
+
+          <div class="details-grid">
+            <div class="detail" *ngIf="movie.budget > 0">
+              <small>Budget</small>
+              <strong>{{ movie.budget | currency }}</strong>
+            </div>
+            <div class="detail" *ngIf="movie.revenue > 0">
+              <small>Revenue</small>
+              <strong>{{ movie.revenue | currency }}</strong>
+            </div>
+            <div class="detail">
+              <small>Languages</small>
+              <strong>{{ getLanguagesList() }}</strong>
+            </div>
+          </div>
+
+          <div class="section">
+            <h5>Rate this movie:</h5>
+            <div class="stars">
+              <button *ngFor="let star of [1,2,3,4,5,6,7,8,9,10]; let i = index"
+                      mat-icon-button
+                      (click)="onRateMovie(i + 1)"
+                      (mouseenter)="hoveredRating = i + 1"
+                      (mouseleave)="hoveredRating = 0"
+                      [disabled]="isSubmittingRating">
+                <mat-icon [class.filled]="i < (hoveredRating || userRating)">
+                  {{ i < (hoveredRating || userRating) ? 'star' : 'star_border' }}
+                </mat-icon>
+              </button>
+            </div>
+
+            <div *ngIf="isSubmittingRating" class="loading">
+              <mat-spinner diameter="20"></mat-spinner>
+              <span>Submitting...</span>
+            </div>
+
+            <p *ngIf="userRating > 0" class="user-rating">
+              You rated: {{ userRating }}/10
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

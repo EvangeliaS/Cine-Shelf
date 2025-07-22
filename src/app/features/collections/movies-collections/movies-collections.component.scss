@@ -1,0 +1,20 @@
+.collection-card {
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+}
+
+.movie-thumbnail {
+  height: 60px;
+  width: 40px;
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.more-indicator {
+  font-size: 0.85rem;
+}

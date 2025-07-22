@@ -1,0 +1,59 @@
+<div class="collection-modal">
+  <!-- Header -->
+  <div class="modal-header">
+    <div class="header-info">
+      <h2>Add to Collection</h2>
+      <span class="movie-count">{{ data.movies.length }} movie(s) selected</span>
+    </div>
+    <button mat-icon-button (click)="closeDialog()" class="close-button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <!-- Selected Movies Preview -->
+  <div class="selected-movies">
+    <div class="movies-preview">
+      <div *ngFor="let movie of data.movies" class="movie-chip">
+        <img [src]="getMoviePoster(movie)" [alt]="movie.title" class="movie-thumb">
+        <span class="movie-title">{{ movie.title }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Collections Section -->
+  <div class="collections-section">
+    <div class="section-header">
+      <h3>Choose Collection</h3>
+      <button mat-stroked-button (click)="createNewCollectionInDialog()" class="new-btn">
+        <mat-icon>add</mat-icon>
+        New Collection
+      </button>
+    </div>
+
+    <!-- Collections List -->
+    <div class="collections-list" *ngIf="collections && collections.length > 0">
+      <div *ngFor="let collection of collections" 
+           class="collection-item" 
+           (click)="addToCollectionImmediately(collection.id)">
+        <div class="collection-info">
+          <mat-icon class="primary-themed-button">folder</mat-icon>
+          <div class="collection-details">
+            <div class="collection-name">{{ collection.title }}</div>
+            <div class="collection-count">{{ collection.movies.length }} movies</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="!collections || collections.length === 0">
+      <mat-icon class="empty-icon">folder_open</mat-icon>
+      <h4>No Collections Yet</h4>
+      <p>Create your first collection to organize your movies</p>
+      <button mat-raised-button class="primary-themed-button" (click)="createNewCollectionInDialog()">
+        <mat-icon>add</mat-icon>
+        Create First Collection
+      </button>
+    </div>
+  </div>
+</div>

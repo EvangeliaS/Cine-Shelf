@@ -1,0 +1,13 @@
+.movie-card {
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  position: relative;
+  
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  button {
+    z-index: 2;
+  }
+}

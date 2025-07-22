@@ -1,0 +1,84 @@
+<div class="container-fluid px-3 px-md-5 py-4">
+  <h1 class="text-start mb-4 fw-bold">Search Movies</h1>
+  <div class="row justify-content-start mb-5">
+    <div class="col-6 d-flex align-items gap-2">
+      <mat-form-field class="flex-grow-1 mb-0" appearance="fill">
+        <mat-label>Search movies</mat-label>
+        <input
+          matInput
+          [formControl]="searchControl"
+          appAlphanumericValidator
+          placeholder="Enter at least 3 characters"
+        />
+        <mat-error *ngIf="searchControl.hasError('minLength') && searchControl.touched">
+            {{ searchControl.errors?.['minLength']?.message }}
+        </mat-error>
+        <mat-error *ngIf="searchControl.hasError('alphanumeric') && searchControl.touched">
+            {{ searchControl.errors?.['alphanumeric']?.message }}
+        </mat-error>
+      </mat-form-field>
+      <button
+        [disabled]="selectedMovies.length === 0"
+        mat-raised-button
+        class="new-btn mt-2"
+        (click)="openAddToCollectionModal()"
+        aria-label="Add selected movies to collection"
+        matTooltip="Add selected movies to collection"
+        matTooltipPosition="above"
+        >
+        <mat-icon>playlist_add</mat-icon>
+        Add to collection
+      </button>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center py-5" *ngIf="isLoading">
+    <mat-spinner diameter="50"></mat-spinner>
+  </div>
+
+  <div class="row g-4 mb-5" *ngIf="movies.length > 0 && !isLoading">
+     <div class="col-6 col-md-4 col-lg-3 col-xl-2" *ngFor="let movie of movies">
+        <mat-card class="h-100 movie-card shadow-sm">
+          <mat-checkbox
+            class="movie-select-checkbox"
+            (change)="toggleSelection(movie, $event.checked)"
+            [checked]="isSelected(movie)">
+          </mat-checkbox>
+          <img 
+            mat-card-image 
+            [src]="getImageUrl(movie.poster_path)" 
+            [alt]="movie.title"
+            class="img-fluid"
+            loading="lazy"
+            (click)="openMovieDetails(movie)">
+
+          <mat-card-content class="p-3 d-flex flex-column h-100">
+            <h6 class="flex-grow-1 mb-3 lh-base">{{ movie.title }}</h6>
+            <div class="mt-auto">
+              <span class="badge bg-warning text-dark px-3 py-2">
+                <i class="bi bi-star-fill me-1"></i>
+                {{ movie.vote_average | number:'1.1-1' }}
+              </span>
+            </div>
+          </mat-card-content>
+        </mat-card>
+    </div>
+  </div>  
+
+   <div class="text-center py-5 text-muted"
+        *ngIf="(searchControl.value?.length ?? 0) >= 3 && movies.length === 0 && !isLoading">
+        <h5>No movies found for "{{ searchControl.value }}"</h5>
+        <p class="mb-0">Try searching with different keywords</p>
+    </div>
+
+  <div class="d-flex justify-content-center mt-4" *ngIf="totalResults > 0">
+    <mat-paginator
+      [length]="totalResults"
+      [pageSize]="20"
+      [pageIndex]="currentPage - 1"
+      [pageSizeOptions]="[]"
+      (page)="onPageChange($event)"
+      showFirstLastButtons
+    ></mat-paginator>
+  </div>
+</div>
