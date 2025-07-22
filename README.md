@@ -94,6 +94,8 @@ const routes: Routes = [
 ];
 ```
 
+---
+
 ## Features
 
 ### 1. Search Page (`/`)
