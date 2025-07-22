@@ -1,6 +1,6 @@
 # 🎬 CineShelf – Movie Collection Angular App
 
-A sleek and modular Angular application that lets you **search for movies**, **view detailed information**, and **manage personal movie collections** using [The Movie Database (TMDB) API](https://developer.themoviedb.org/docs/getting-started). Built with modern Angular features like standalone components, lazy-loaded routes, and RxJS-powered services, CineShelf is perfect for showcasing clean architecture and frontend skills. Users can effortlessly explore movies and organize their favorites in custom collections.
+A sleek and modular Angular application that lets you **search for movies**, **view detailed information**, and **manage personal movie collections** using [The Movie Database (TMDB) API](https://developer.themoviedb.org/docs/getting-started). Built with modern Angular features like standalone components, lazy-loaded routes, and RxJS-powered services, CineShelf is perfect for showcasing clean architecture and frontend skills.
 
 ---
 
